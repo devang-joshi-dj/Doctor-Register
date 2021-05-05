@@ -200,7 +200,11 @@ function checkConnection($connection)
 	}
 }
 
-if (validateName($name) && validateDegree($degree) && validateSpeciality($speciality) && validateTenure($tenure) && validatePhone($phone) && validateEmail($email) && validateTiming($timing) && validateCountry($country) && validateCity($city) && validateArea($area) && validateReview($review) && checkConnection($connection))
+if (
+	validateName($name) && validateDegree($degree) && validateSpeciality($speciality) && validateTenure($tenure) &&
+	validatePhone($phone) && validateEmail($email) && validateTiming($timing) && validateCountry($country) &&
+	validateCity($city) && validateArea($area) && validateReview($review) && checkConnection($connection)
+)
 // function to check if everything is valid
 // if everything is valid it will be added into database
 {
@@ -241,17 +245,19 @@ if ($validity == true) {
 		<center>
 			<h1>Something went wrong</h1>
 			<?php
-			echo "<span style='font-weight:bold'>" . $nameErr . "</span><br/>";
-			echo "<span style='font-weight:bold'>" . $degreeErr . "</span><br/>";
-			echo "<span style='font-weight:bold'>" . $specialityErr . "</span><br/>";
-			echo "<span style='font-weight:bold'>" . $tenureErr . "</span><br/>";
-			echo "<span style='font-weight:bold'>" . $phoneErr . "</span><br/>";
-			echo "<span style='font-weight:bold'>" . $emailErr . "</span><br/>";
-			echo "<span style='font-weight:bold'>" . $timingErr . "</span><br/>";
-			echo "<span style='font-weight:bold'>" . $countryErr . "</span><br/>";
-			echo "<span style='font-weight:bold'>" . $cityErr . "</span><br/>";
-			echo "<span style='font-weight:bold'>" . $areaErr . "</span><br/>";
-			echo "<span style='font-weight:bold'>" . $reviewErr . "</span><br/>";
+			echo "<p style='font-weight:bold'>";
+			echo "<span>" . $nameErr . "</span><br/>";
+			echo "<span>" . $degreeErr . "</span><br/>";
+			echo "<span>" . $specialityErr . "</span><br/>";
+			echo "<span>" . $tenureErr . "</span><br/>";
+			echo "<span>" . $phoneErr . "</span><br/>";
+			echo "<span>" . $emailErr . "</span><br/>";
+			echo "<span>" . $timingErr . "</span><br/>";
+			echo "<span>" . $countryErr . "</span><br/>";
+			echo "<span>" . $cityErr . "</span><br/>";
+			echo "<span>" . $areaErr . "</span><br/>";
+			echo "<span>" . $reviewErr . "</span><br/>";
+			echo "</p>";
 			?>
 			<h2>You are bieng redirected back to main page in 10 seconds</h2>
 		</center>
