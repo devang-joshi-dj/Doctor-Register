@@ -7,7 +7,6 @@ $nameErr = "";
 $degree = $_POST["degree"];
 $degreeErr = "";
 $hospital = $_POST["hospital"]; // optional
-$hospitalErr = "";
 $speciality = $_POST["speciality"];
 $specialityErr = "";
 $tenure = $_POST["tenure"];
@@ -48,11 +47,11 @@ if ($conn->connect_error) {
 function validateName($name)
 // function to check if name is valid
 {
-	if (preg_match("/^[a-zA-Z-' ]*$/", $name) && $name != "") {
+	if ($name != "" && preg_match("/^[a-zA-Z-' ]*$/", $name)) {
 		return true;
 	} else {
 		global $nameErr;
-		$nameErr = "Your name is invalid/empty";
+		$nameErr = "Your name is either invalid or empty";
 		return false;
 	}
 }
@@ -61,11 +60,11 @@ validateName($name);
 function validateEmail($email)
 // function to check if email is valid
 {
-	if (filter_var($email, FILTER_VALIDATE_EMAIL) && $email != '') {
+	if ($email != '' && filter_var($email, FILTER_VALIDATE_EMAIL)) {
 		return true;
 	} else {
 		global $emailErr;
-		$emailErr = "Your email is invalid/empty";
+		$emailErr = "Your email is either invalid or empty";
 		return false;
 	}
 }
@@ -80,7 +79,7 @@ function validatePhone($phone)
 		return true;
 	} else {
 		global $phoneErr;
-		$phoneErr = "Your phone number is invalid/empty";
+		$phoneErr = "Your phone number is either invalid or empty";
 		return false;
 	}
 }
@@ -93,7 +92,7 @@ function validateDegree($degree)
 		return true;
 	} else {
 		global $degreeErr;
-		$degreeErr = "Your degree is invalid/empty";
+		$degreeErr = "Your degree is empty";
 		return false;
 	}
 }
@@ -106,7 +105,7 @@ function validateSpeciality($speciality)
 		return true;
 	} else {
 		global $specialityErr;
-		$specialityErr = "Your speciality is invalid/empty";
+		$specialityErr = "Your speciality is empty";
 		return false;
 	}
 }
@@ -119,7 +118,7 @@ function validateTenure($tenure)
 		return true;
 	} else {
 		global $tenureErr;
-		$tenureErr = "Your tenure is invalid/empty";
+		$tenureErr = "Your tenure is empty";
 		return false;
 	}
 }
@@ -132,7 +131,7 @@ function validateTiming($timing)
 		return true;
 	} else {
 		global $timingErr;
-		$timingErr = "Your timings are invalid/empty";
+		$timingErr = "Your timings are empty";
 		return false;
 	}
 }
@@ -145,7 +144,7 @@ function validateCountry($country)
 		return true;
 	} else {
 		global $countryErr;
-		$countryErr = "Your country is invalid/empty";
+		$countryErr = "Your country is empty";
 		return false;
 	}
 }
@@ -158,7 +157,7 @@ function validateCity($city)
 		return true;
 	} else {
 		global $cityErr;
-		$cityErr = "Your city is invalid/empty";
+		$cityErr = "Your city is empty";
 		return false;
 	}
 }
@@ -171,7 +170,7 @@ function validateArea($area)
 		return true;
 	} else {
 		global $areaErr;
-		$areaErr = "Your area is invalid/empty";
+		$areaErr = "Your area is empty";
 		return false;
 	}
 }
@@ -184,6 +183,8 @@ function validateReview($review)
 	if ($review != '' && $reviewLength <= 255) {
 		return true;
 	} else {
+		global $reviewErr;
+		$reviewErr = "Your review is either empty or too long";
 		return false;
 	}
 }
@@ -201,11 +202,17 @@ function checkConnection($connection)
 
 if (validateName($name) && validateDegree($degree) && validateSpeciality($speciality) && validateTenure($tenure) && validatePhone($phone) && validateEmail($email) && validateTiming($timing) && validateCountry($country) && validateCity($city) && validateArea($area) && validateReview($review) && checkConnection($connection))
 // function to check if everything is valid
+// if everything is valid it will be added into database
 {
 	$sql = "
-	INSERT INTO records (name, degree, hospital,speciality, tenure, phone, email, timing, country, city, area, review)
+	INSERT INTO records
+	(name, degree, hospital,speciality, tenure, phone,
+	email, timing, country, city, area, review)
 	VALUES
-	('" . $name . "', '" . $degree . "', '" . $hospital . "', '" . $speciality . "', '" . $tenure . "', '" . $phone . "', '" . $email . "', '" . $timing . "', '" . $country . "', '" . $city . "', '" . $area . "', '" . $review . "')
+	('" . $name . "', '" . $degree . "', '" . $hospital . "',
+	'" . $speciality . "', '" . $tenure . "', '" . $phone . "',
+	'" . $email . "', '" . $timing . "', '" . $country . "',
+	'" . $city . "', '" . $area . "', '" . $review . "')
 	";
 
 	if ($conn->query($sql) === TRUE) {
