@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap');
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	background-image: linear-gradient(to bottom, #ff9472, #B0DAB9);
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	user-select: none;
+}
+
+.header {
+	position: absolute;
+	top: 20px;
+}
+
+.header h1 {
+	color: cornflowerblue;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header h2 {
+	color: crimson;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+form {
+	font-family: 'Titillium Web', sans-serif;
+}
+
+form>div {
+	border-radius: 10px;
+	background-color: #f2f2f2;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+form>div>div {
+	display: flex;
+	flex-direction: row;
+}
+
+form>div>div div {
+	width: 50%;
+	border-radius: 20px;
+	padding: 20px;
+	margin: 10px;
+	background-color: #b8b8b8;
+}
+
+form input {
+	outline: none;
+	width: 100%;
+	height: 20px;
+	display: inline-block;
+	border: 1px solid rgb(177, 170, 170);
+	border-radius: 4px;
+}
+
+form textarea {
+	width: 100%;
+	height: 65px;
+	outline: none;
+	border: 1px solid rgb(177, 170, 170);
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	resize: none;
+}
+
+form input[type="submit"] {
+	font-weight: bold;
+	width: 160.8px;
+	height: 30px;
+	background-color: cadetblue;
+	outline: none;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+	background-color: rgb(47, 99, 99);
+}
+
+form input[type="submit"]:active {
+	background-color: brown;
+}

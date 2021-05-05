@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Its a regisration web app for doctors" />
+    <meta name="keywords" content="HTML, CSS, PHP, Doctor, Registration" />
+    <meta name="author" content="Devang Joshi" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Registration Portal</title>
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1>Doctor Registration Portal</h1>
+      <h2>Because we have The World's Finest</h2>
+    </div>
+
+    <form action="insertAction.php" method="POST">
+		<div>
+			<div>
+				<div class="column1">
+					<label for= "name">Name</label>
+					<input type="text" name="name" value="" />
+				
+					<label for= "degree">Degree(s):</label>
+					<input type="text" name="degree" value="" />
+				
+					<label for= "hospital">Attached to Hospital(if any):</label>
+					<input type="text" name="hospital" value="" />
+				
+					<label for= "speciality">Speciality:</label>
+					<input type="text" name="speciality" value="" />
+				
+					<label for= "tenure">Tenure of Practice:</label>
+					<input type="text" name="tenure" value="" />
+				
+					<label for= "phone">Phone Number:</label>
+					<input type="number" name="phone" />
+
+					<label for= "email">Email Id:</label>
+					<input type="email" name="email" />
+				</div>
+	
+				<div class="column2">
+					<label for= "timing">OPD Timing:</label>
+					<input type="text" name="timing" value="" />
+				
+					<label for= "country">Country:</label>
+					<input type="text" name="country" value="" />
+				
+					<label for= "city">City:</label>
+					<input type="text" name="city" value="" />
+				
+					<label for= "area">Address Area:</label>
+					<textarea name="area" value=""></textarea>
+			
+					<label for= "review">Review:</label>
+					<textarea name="review" value=""></textarea>
+				</div>
+			</div>
+			<input type="submit" value="Register" />
+		</div>
+        
+      </table>
+    </form>
+  </body>
+</html>
