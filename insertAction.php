@@ -36,12 +36,50 @@ $password = "";
 $dbname = "doctors";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password);
 
 $connection = true;
 // Check connection
 if ($conn->connect_error) {
 	$connection = false;
+}
+
+// creating database
+$dbSql = "CREATE DATABASE IF NOT EXISTS doctors";
+
+$dbExists = false;
+if ($conn->query($dbSql) === TRUE) {
+	$dbExists = true;
+}
+
+// connecting to database
+mysqli_select_db($conn, $dbname);
+
+// checking if table exists
+$tableExists = $conn->query('select 1 from records LIMIT 1');
+
+// creating table if doesn't exists
+if ($tableExists == false && $dbExists == true) {
+	$tableSql = "CREATE TABLE records (
+		name VARCHAR(100) NOT NULL,
+		degree VARCHAR(100) NOT NULL,
+		hospital VARCHAR(100) NOT NULL,
+		speciality VARCHAR(100) NOT NULL,
+		tenure VARCHAR(100) NOT NULL,
+		phone int(10) NOT NULL,
+		email VARCHAR(100) NOT NULL,
+		timing VARCHAR(100) NOT NULL,
+		country VARCHAR(100) NOT NULL,
+		city VARCHAR(100) NOT NULL,
+		area VARCHAR(100) NOT NULL,
+		review VARCHAR(100) NOT NULL
+		)";
+
+	if ($conn->query($tableSql) === TRUE) {
+		$tableExists = true;
+	} else {
+		$tableExists = false;
+	}
 }
 
 function validateName($name)
@@ -200,26 +238,33 @@ function checkConnection($connection)
 	}
 }
 
+function tableExists($tableExists)
+// function to check if connection is established or not
+{
+	if ($tableExists) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 if (
 	validateName($name) && validateDegree($degree) && validateSpeciality($speciality) && validateTenure($tenure) &&
-	validatePhone($phone) && validateEmail($email) && validateTiming($timing) && validateCountry($country) &&
-	validateCity($city) && validateArea($area) && validateReview($review) && checkConnection($connection)
+	validatePhone($phone) && validateEmail($email) && validateTiming($timing) && validateCountry($country) && validateCity($city)
+	&& validateArea($area) && validateReview($review) && checkConnection($connection) && tableExists($tableExists)
 )
 // function to check if everything is valid
 // if everything is valid it will be added into database
 {
-	$sql = "
+	$insertSql = "
 	INSERT INTO records
-	(name, degree, hospital,speciality, tenure, phone,
-	email, timing, country, city, area, review)
+	(name, degree, hospital,speciality, tenure, phone, email, timing, country, city, area, review)
 	VALUES
-	('" . $name . "', '" . $degree . "', '" . $hospital . "',
-	'" . $speciality . "', '" . $tenure . "', '" . $phone . "',
-	'" . $email . "', '" . $timing . "', '" . $country . "',
-	'" . $city . "', '" . $area . "', '" . $review . "')
+	('" . $name . "', '" . $degree . "', '" . $hospital . "', '" . $speciality . "', '" . $tenure . "', '" . $phone . "',
+	'" . $email . "', '" . $timing . "', '" . $country . "', '" . $city . "', '" . $area . "', '" . $review . "')
 	";
 
-	if ($conn->query($sql) === TRUE) {
+	if ($conn->query($insertSql) === TRUE) {
 		$validity = true;
 	}
 
@@ -264,7 +309,7 @@ if ($validity == true) {
 	</body>
 
 <?php
-	header("refresh:5;url=index.html");
+	header("refresh:10;url=index.html");
 }
 ?>
 
