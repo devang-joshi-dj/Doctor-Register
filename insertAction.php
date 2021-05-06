@@ -72,7 +72,8 @@ if ($tableExists == false && $dbExists == true) {
 		country VARCHAR(100) NOT NULL,
 		city VARCHAR(100) NOT NULL,
 		area VARCHAR(100) NOT NULL,
-		review VARCHAR(100) NOT NULL
+		review VARCHAR(100) NOT NULL,
+		PRIMARY KEY (email)
 		)";
 
 	if ($conn->query($tableSql) === TRUE) {
@@ -96,10 +97,18 @@ function validateName($name)
 validateName($name);
 
 function validateEmail($email)
-// function to check if email is valid
+// function to check if email is valid or already exists or not
 {
 	if ($email != '' && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-		return true;
+		global $conn;
+		$result = $conn->query("SELECT * FROM records WHERE email = '" . $email . "'");
+		if ($result->num_rows == 0) {
+			return true;
+		} else {
+			global $emailErr;
+			$emailErr = "Your email already exists";
+			return false;
+		}
 	} else {
 		global $emailErr;
 		$emailErr = "Your email is either invalid or empty";
