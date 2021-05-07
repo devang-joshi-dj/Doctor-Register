@@ -61,19 +61,20 @@ $tableExists = $conn->query('select 1 from records LIMIT 1');
 // creating table if doesn't exists
 if ($tableExists == false && $dbExists == true) {
 	$tableSql = "CREATE TABLE records (
+		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 		name VARCHAR(100) NOT NULL,
 		degree VARCHAR(100) NOT NULL,
 		hospital VARCHAR(100) NOT NULL,
 		speciality VARCHAR(100) NOT NULL,
 		tenure VARCHAR(100) NOT NULL,
 		phone int(10) NOT NULL,
-		email VARCHAR(100) NOT NULL,
+		email VARCHAR(100) NOT NULL UNIQUE,
 		timing VARCHAR(100) NOT NULL,
 		country VARCHAR(100) NOT NULL,
 		city VARCHAR(100) NOT NULL,
 		area VARCHAR(100) NOT NULL,
 		review VARCHAR(100) NOT NULL,
-		PRIMARY KEY (email)
+		reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 		)";
 
 	if ($conn->query($tableSql) === TRUE) {
